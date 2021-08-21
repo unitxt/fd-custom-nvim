@@ -123,18 +123,6 @@ tnoremap <silent> <C-z> <C-\><C-n>:ToggleTerminal<Enter>
 
 " **** Buffers
 nnoremap <A-q> :ls<CR>
-nnoremap <A-1> :1b<CR>
-nnoremap <A-2> :2b<CR>
-nnoremap <A-3> :3b<CR>
-nnoremap <A-4> :4b<CR>
-nnoremap <A-5> :5b<CR>
-nnoremap <A-5> :6b<CR>
-nnoremap <A-7> :7b<CR>
-nnoremap <A-8> :8b<CR>
-nnoremap <A-9> :9b<CR>
-nnoremap <A-1>0 :10b<CR>
-nnoremap <A-1>1 :11b<CR>
-nnoremap <A-1>2 :12b<CR>
 
 "  _____
 " |_   _| __ ___  ___
