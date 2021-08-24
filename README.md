@@ -1,8 +1,8 @@
-# Custom Nvim
+# Nvim settings 
 
 Custom neovim for frontend development
 
-### Settings:
+Settings:
 
 ```bash
 set nocompatible
@@ -33,7 +33,7 @@ set ruler
 set termguicolors
 ```
 
-### Plugins:
+Plugins:
 
 ```bash
 call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
@@ -58,7 +58,7 @@ Plug 'prettier/vim-prettier', {
 call plug#end()
 ```
 
-### Handlebars fix
+Handlebars fix
 
 ```bash
 augroup handlebars_ft
