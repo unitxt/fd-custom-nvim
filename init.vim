@@ -21,8 +21,9 @@ set encoding=utf-8
 set hlsearch
 set ignorecase
 set smartcase
-set rnu
+set nu rnu
 set ruler
+set termguicolors
 
 "  ____  _
 " |  _ \| |_   _  __ _
@@ -40,7 +41,8 @@ Plug 'junegunn/fzf.vim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
 
-Plug 'pangloss/vim-javascript'
+" Plug 'pangloss/vim-javascript'
+" Plug 'leafgarland/typescript-vim'
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -50,6 +52,8 @@ Plug 'mustache/vim-mustache-handlebars'
 Plug 'mattn/emmet-vim'
 
 Plug 'ghifarit53/tokyonight-vim'
+" Plug 'morhetz/gruvbox'
+" Plug 'ayu-theme/ayu-vim'
 
 Plug 'neoclide/coc.nvim' , { 'branch' : 'release' }
 
@@ -63,6 +67,7 @@ Plug 'preservim/nerdcommenter'
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'html'] }
+
 call plug#end()
 
 " **** Set html.handlebars to handlebars
@@ -81,14 +86,26 @@ autocmd FileType scss setl iskeyword+=@-@
 "                                                                |___/
 
 " **** Set Theme
+
+" Dracula
 set termguicolors
 let g:tokyonight_style = 'night' " available: night, storm
 let g:tokyonight_enable_italic = 1
-let g:tokyonight_current_word = 'bold'
+" let g:tokyonight_current_word = 'bold'
 colorscheme tokyonight
-
-" **** Air Line bottom bar config
+let g:tokyonight_disable_italic_comment=0
+let g:tokyonight_transparent_background=1
 let g:airline_theme='tokyonight'
+
+" Gruv
+" autocmd vimenter * ++nested colorscheme gruvbox
+" let g:gruvbox_transparent_bg=1
+" let g:gruvbox_contrast_dark='hard'
+" let g:gruvbox_italic=1
+
+" let ayucolor="dark"
+" colorscheme ayu
+
 let g:airline_powerline_fonts=1
 
 "  ____  _           _
@@ -100,8 +117,16 @@ let g:airline_powerline_fonts=1
 " **** Motion
 imap jj <Esc>
 
+" **** Terminal Fix 
+tnoremap <Esc> <C-\><C-n>
+nnoremap <silent> <C-z> :ToggleTerminal<Enter>
+tnoremap <silent> <C-z> <C-\><C-n>:ToggleTerminal<Enter>
+
 " ***** Emmet
-" let g:user_emmet_leader_key='<C-Y>'
+let g:user_emmet_leader_key='<leader>e'
+
+" **** Search
+nnoremap <A-a> :Files 
 
 " **** Vim Tabs
 map <C-H> <Plug>(wintabs_previous)
@@ -114,27 +139,31 @@ map <C-W>o <Plug>(wintabs_only_window)
 command! Tabc WintabsCloseVimtab
 command! Tabo WintabsOnlyVimtab
 
-" Search
-nnoremap <A-a> :Files 
-
-" **** Terminal
-nnoremap <silent> <C-z> :ToggleTerminal<Enter>
-tnoremap <silent> <C-z> <C-\><C-n>:ToggleTerminal<Enter>
-
 " **** Buffers
 nnoremap <A-q> :ls<CR>
+nnoremap <A-1> :b1<CR>
+nnoremap <A-2> :b2<CR>
+nnoremap <A-3> :b3<CR>
+nnoremap <A-4> :b4<CR>
+nnoremap <A-5> :b5<CR>
+nnoremap <A-6> :b6<CR>
+nnoremap <A-7> :b7<CR>
+nnoremap <A-8> :b8<CR>
+nnoremap <A-9> :b9<CR>
+nnoremap <A-1>0 :b10<CR>
+nnoremap <A-1>1 :b11<CR>
+nnoremap <A-1>2 :b12<CR>
 
-"  _____
 " |_   _| __ ___  ___
 "   | || '__/ _ \/ _ \
 "   | || | |  __/  __/
 "   |_||_|  \___|\___|
 
 let g:nvim_tree_side = 'right' "left by default
-let g:nvim_tree_width = 40 "30 by default, can be width_in_columns or 'width_in_percent%'
+let g:nvim_tree_width = 30 "30 by default, can be width_in_columns or 'width_in_percent%'
 let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache' ] "empty by default
 let g:nvim_tree_gitignore = 1 "0 by default
-let g:nvim_tree_auto_open = 1 "0 by default, opens the tree when typing `vim $DIR` or `vim`
+let g:nvim_tree_auto_open = 0 "0 by default, opens the tree when typing `vim $DIR` or `vim`
 let g:nvim_tree_auto_close = 1 "0 by default, closes the tree when it's the last window
 let g:nvim_tree_auto_ignore_ft = [ 'startify', 'dashboard' ] "empty by default, don't auto open tree on specific filetypes.
 let g:nvim_tree_quit_on_open = 1 "0 by default, closes the tree when you open a file
@@ -172,9 +201,9 @@ let g:nvim_tree_window_picker_exclude = {
 let g:nvim_tree_special_files = { 'README.md': 1, 'Makefile': 1, 'MAKEFILE': 1 } " List of filenames that gets highlighted with NvimTreeSpecialFile
 let g:nvim_tree_show_icons = {
     \ 'git': 1,
-    \ 'folders': 0,
-    \ 'files': 0,
-    \ 'folder_arrows': 0,
+    \ 'folders': 1,
+    \ 'files': 1,
+    \ 'folder_arrows': 1,
     \ }
 "If 0, do not show the icons for one of 'git' 'folder' and 'files'
 "1 by default, notice that if 'files' is 1, it will only display
@@ -217,8 +246,8 @@ let g:nvim_tree_icons = {
 nnoremap <C-n> :NvimTreeToggle<CR>
 "nnoremap <leader>r :NvimTreeRefresh<CR>
 "nnoremap <leader>n :NvimTreeFindFile<CR>
-nnoremap çtr :NvimTreeRefresh<CR>
-nnoremap çtf :NvimTreeFindFile<CR>
+nnoremap <C-n>r :NvimTreeRefresh<CR>
+nnoremap <C-n>f :NvimTreeFindFile<CR>
 " NvimTreeOpen, NvimTreeClose and NvimTreeFocus are also available if you need them
 
 set termguicolors " this variable must be enabled for colors to be applied properly
